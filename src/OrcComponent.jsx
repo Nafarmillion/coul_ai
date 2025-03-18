@@ -38,7 +38,7 @@ const OcrComponent = () => {
             const formData = new FormData();
             formData.append('imageFile', file);
 
-            const response = await axios.post('https://localhost:7214/api/ocr/recognize', formData, {
+            const response = await axios.post('http://localhost:8080/api/ocr/recognize', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
