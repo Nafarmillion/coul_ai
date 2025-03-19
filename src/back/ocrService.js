@@ -1,7 +1,7 @@
 import Tesseract from 'tesseract.js';
 
 
-export const processImage = async (imageFile) => {
+export const processImage = async (imageFile, language = 'ukr') => {
     if (!imageFile) {
         throw new Error('Файл не вказано');
     }
@@ -9,7 +9,7 @@ export const processImage = async (imageFile) => {
     try {
         const { data } = await Tesseract.recognize(
             imageFile,
-            'ukr',
+            language,
             {
                 logger: (m) => console.log(m),
             }
