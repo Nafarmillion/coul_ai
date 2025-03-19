@@ -1,4 +1,4 @@
-import OcrComponent from "./OcrComponent";
+import OcrComponent from "./OrcComponent";
 
 function App() {
   return (
