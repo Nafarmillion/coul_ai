@@ -2,7 +2,9 @@ import OcrComponent from "./OrcComponent";
 
 function App() {
   return (
-      <OcrComponent></OcrComponent>
+      <div className="App">
+        <OcrComponent />
+      </div>
   );
 }
 

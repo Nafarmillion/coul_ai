@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './OrcComponent.css';
-import Tesseract from 'tesseract.js';
+import { processImage } from './back/ocrService';
 
-
-const OcrComponent = () => {
+const OrcComponent = () => {
     const [file, setFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [recognizedText, setRecognizedText] = useState('');
@@ -35,14 +34,8 @@ const OcrComponent = () => {
         setRecognizedText('');
 
         try {
-            const {data} = await Tesseract.recognize(
-                file,
-                'ukr',
-                {
-                    logger: (m) => console.log(m),
-                }
-            );
-            setRecognizedText(data.text);
+            const result = await processImage(file);
+            setRecognizedText(result);
         } catch (err) {
             setError(`Помилка: ${err.message}`);
             console.error('Error:', err);
@@ -63,8 +56,6 @@ const OcrComponent = () => {
 
     return (
         <div className="main-wrapper">
-
-
             <div className="main-content">
                 <h1 className="page-title">Розпізнавання рукописного тексту</h1>
 
@@ -128,4 +119,4 @@ const OcrComponent = () => {
     );
 };
 
-export default OcrComponent;
+export default OrcComponent;
