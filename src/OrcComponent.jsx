@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './OrcComponent.css';
+import Tesseract from 'tesseract.js';
 
 
 const OcrComponent = () => {
@@ -35,18 +35,16 @@ const OcrComponent = () => {
         setRecognizedText('');
 
         try {
-            const formData = new FormData();
-            formData.append('imageFile', file);
-
-            const response = await axios.post('http://localhost:5000/api/ocr/recognize', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
-            setRecognizedText(response.data.text);
+            const { data } = await Tesseract.recognize(
+                file,
+                'ukr',
+                {
+                    logger: (m) => console.log(m),
+                }
+            );
+            setRecognizedText(data.text);
         } catch (err) {
-            setError(`Помилка: ${err.response?.data || err.message}`);
+            setError(`Помилка: ${err.message}`);
             console.error('Error:', err);
         } finally {
             setIsLoading(false);
