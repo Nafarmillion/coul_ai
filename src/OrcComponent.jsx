@@ -80,7 +80,7 @@ const OcrComponent = () => {
                                 ) : (
                                     <div className="upload-placeholder">
                                         <label htmlFor="imageFile" className="file-label">
-
+                                            Натисніть, щоб вибрати файл
                                             <input
                                                 type="file"
                                                 id="imageFile"
@@ -92,7 +92,6 @@ const OcrComponent = () => {
                                     </div>
                                 )}
                             </div>
-
                             <button className='button'
                                     type="submit"
                                     disabled={isLoading || !file}>
@@ -118,7 +117,7 @@ const OcrComponent = () => {
                         </div>
 
                         {recognizedText && (
-                            <button className="button copy-button" onClick={copyToClipboard}>
+                            <button className="button-copy-button" onClick={copyToClipboard}>
                                 Копіювати текст
                             </button>
                         )}

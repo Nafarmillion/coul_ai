@@ -1,9 +1,10 @@
 /* Main color palette */
 :root {
     --primary-bg: #b1d8d8;
-    --secondary-bg: #5a6566;
+    --secondary-bg: #b1d8d8;
     --button-bg: #c9e6e3;
     --button-hover: #a8d5d0;
+    --button-active: #80d1c8;
     --text-color: #121212;
 }
 
@@ -41,7 +42,8 @@ body {
 
 /* Main content section */
 .main-content {
-    background-color: var(--secondary-bg);
+    background: url('https://st.depositphotos.com/1389325/1921/v/950/depositphotos_19212171-stock-illustration-mathematics-seamless-pattern.jpg') repeat;
+    background-size: auto;
     min-height: calc(100vh - 70px);
     padding: 40px 20px;
     color: white;
@@ -54,13 +56,14 @@ body {
     margin-bottom: 40px;
 }
 
+
 /* Upload area */
 .upload-area {
     width: 90%;
     max-width: 800px;
     height: 350px;
     margin: 0 auto;
-    background-color: #e9e9e9;
+    background-color: transparent;
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -89,8 +92,21 @@ body {
 }
 
 .left-panel {
-    flex: 1.2;
+    flex: 1;
     min-width: 0;
+    max-width: 800px;
+    width: 50%;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.left-panel:hover {
+    transition: all 0.4s ease-in-out;
+    transform: scale(1.04);
 }
 
 .right-panel {
@@ -98,6 +114,20 @@ body {
     min-width: 0;
     display: flex;
     flex-direction: column;
+    min-width: 0;
+    width: 50%;
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.right-panel:hover {
+    transition: all 0.4s ease-in-out;
+    transform: scale(1.04);
 }
 
 /* Text box for analysis results */
@@ -109,8 +139,65 @@ body {
     padding-left: 30px;
     font-size: 2rem;
     margin-bottom: 12px;
-    color: white;
+    color: #2c3e50;
+    text-align: center;
+    font-weight: 600;
+    padding-top: 30px;
 }
+
+.text-box {
+    background-color: #f5f5f5; /* Светло-серый фон */
+    border-radius: 12px; /* Увеличено скругление */
+    min-height: 350px;
+    padding: 20px;
+    width: 100%;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    padding: 30px; /* Больше отступов внутри */
+}
+
+
+.recognized-text-content {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: #222; /* Темный, но не черный */
+    line-height: 1.6;
+    text-align: justify;
+}
+
+#imageFile {
+    display: none;
+}
+
+label[for="imageFile"] {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0097a7;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+label[for="imageFile"]:hover {
+    background-color: #00838f;
+}
+
+label[for="imageFile"]:active {
+    background-color: #02707a;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    border-radius: 8px;
+}
+
 
 .text-box {
     background-color: #d9d9d9;
@@ -162,6 +249,10 @@ body {
     background-color: var(--button-hover);
 }
 
+.button:active {
+    background-color: var(--button-active);
+}
+
 .button-icon {
     margin-left: 10px;
 }
@@ -182,14 +273,35 @@ body {
     max-width: 350px;
 }
 
+h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
+    padding: 10px 5vw 20px;
+    display: block; /* inline-block не обов’язковий */
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-width: 90%;
+    width: fit-content; /* Щоб ширина була під текст */
+    margin: 0 auto; /* Центрує блок */
+}
+
+
+
+h1:hover {
+    color: #2c3150;
+    transition: all 0.4s ease-in-out;
+    transform: scale(1.04);
+}
+
 .back-button-icon {
     margin-right: 10px;
 }
 
 @media (max-width: 768px) {
-    .page-title {
-        font-size: 2rem;
-    }
 
     .upload-area {
         height: 250px;
