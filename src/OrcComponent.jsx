@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './OrcComponent.css';
 import Tesseract from 'tesseract.js';
 
@@ -35,7 +35,7 @@ const OcrComponent = () => {
         setRecognizedText('');
 
         try {
-            const { data } = await Tesseract.recognize(
+            const {data} = await Tesseract.recognize(
                 file,
                 'ukr',
                 {
@@ -62,60 +62,69 @@ const OcrComponent = () => {
     };
 
     return (
-        <div>
-            {/* ТУТ */}
-            <h1>Розпізнавання тексту з зображення</h1>
+        <div className="main-wrapper">
 
-            {/* ТУТ */}
-            <form className='container'onSubmit={handleSubmit}>
-                {/* ТУТ */}
-                <div>
-                    {/* ТУТ */}
-                    <label htmlFor="imageFile">
-                        {previewUrl ? 'Змінити зображення' : 'Виберіть зображення'}
-                        <input
-                            type="file"
-                            id="imageFile"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                        />
-                    </label>
-                </div>
 
-                {previewUrl && (
-                    // ТУТ
-                    <div>
-                        {/* Может и тут... */}
-                        <img src={previewUrl} alt="Preview" />
+            <div className="main-content">
+                <h1 className="page-title">Розпізнавання рукописного тексту</h1>
+
+                <div className="content-container">
+                    <div className="left-panel">
+                        <h2 className="text-box-title">Виберіть зображення</h2>
+                        <form className='upload-form' onSubmit={handleSubmit}>
+                            <div className="upload-area">
+                                {previewUrl ? (
+                                    <div className="preview-container">
+                                        <img src={previewUrl} alt="Preview" className="image-preview"/>
+                                    </div>
+                                ) : (
+                                    <div className="upload-placeholder">
+                                        <label htmlFor="imageFile" className="file-label">
+
+                                            <input
+                                                type="file"
+                                                id="imageFile"
+                                                className="file-input"
+                                                accept="image/*"
+                                                onChange={handleFileChange}
+                                            />
+                                        </label>
+                                    </div>
+                                )}
+                            </div>
+
+                            <button className='button'
+                                    type="submit"
+                                    disabled={isLoading || !file}>
+                                {isLoading ? 'Обробка...' : 'Завантажити'}
+                            </button>
+                        </form>
+
+                        {error && <div className="error-message">{error}</div>}
                     </div>
-                )}
 
-                {/* Может и нет... */}
-                <button className='upload-btn'
-                        type="submit"
-                        disabled={isLoading || !file}>
-                    {isLoading ? 'Обробка...' : 'Розпізнати текст'}
-                </button>
-            </form>
+                    <div className="right-panel">
+                        <h2 className="text-box-title">Результат аналізу</h2>
+                        <div className="text-box">
+                            {isLoading ? (
+                                <div className="loading-indicator">Обробка зображення...</div>
+                            ) : recognizedText ? (
+                                <div className="recognized-text-content">{recognizedText}</div>
+                            ) : (
+                                <div className="placeholder-text">
+                                    Тут з'явиться розпізнаний текст після завантаження та обробки зображення
+                                </div>
+                            )}
+                        </div>
 
-            {/* :) */}
-            {error && <div className="error-message">{error}</div>}
-
-            {recognizedText && (
-                // Точно?
-                <div>
-                    {/* Уверена? */}
-                    <div>
-                        <h3>Розпізнаний текст:</h3>
-                        {/* ^_^ */}
-                        <button onClick={copyToClipboard}>
-                            Копіювати
-                        </button>
+                        {recognizedText && (
+                            <button className="button copy-button" onClick={copyToClipboard}>
+                                Копіювати текст
+                            </button>
+                        )}
                     </div>
-                    {/* xixixaxa */}
-                    <div>{recognizedText}</div>
                 </div>
-            )}
+            </div>
         </div>
     );
 };
