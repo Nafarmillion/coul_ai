@@ -1,4 +1,3 @@
-/* Main color palette */
 :root {
     --primary-bg: #b1d8d8;
     --secondary-bg: #b1d8d8;
@@ -8,7 +7,6 @@
     --text-color: #121212;
 }
 
-/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -20,7 +18,6 @@ body {
     background-color: var(--primary-bg);
 }
 
-/* Header styles */
 .header {
     display: flex;
     justify-content: space-between;
@@ -40,7 +37,6 @@ body {
     cursor: pointer;
 }
 
-/* Main content section */
 .main-content {
     background: url('https://st.depositphotos.com/1389325/1921/v/950/depositphotos_19212171-stock-illustration-mathematics-seamless-pattern.jpg') repeat;
     background-size: auto;
@@ -130,9 +126,23 @@ body {
     transform: scale(1.04);
 }
 
-/* Text box for analysis results */
 .text-box-container {
     margin-top: 20px;
+}
+.button-copy-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    padding: 20px 25px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin: 20px auto;
+    border: none;
+    transition: background-color 0.3s;
+    max-width: 350px;
 }
 
 .text-box-title {
@@ -146,49 +156,56 @@ body {
 }
 
 .text-box {
-    background-color: #f5f5f5; /* Светло-серый фон */
-    border-radius: 12px; /* Увеличено скругление */
+    background-color: #f5f5f5;
+    border-radius: 12px;
     min-height: 350px;
     padding: 20px;
     width: 100%;
     overflow-y: auto;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
-    padding: 30px; /* Больше отступов внутри */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
 }
 
 
 .recognized-text-content {
     font-family: 'Inter', sans-serif;
     font-size: 1.1rem;
-    color: #222; /* Темный, но не черный */
+    color: #222;
     line-height: 1.6;
     text-align: justify;
 }
 
 #imageFile {
     display: none;
+    object-fit: fill;
+
 }
 
 label[for="imageFile"] {
-    display: inline-block;
-    padding: 10px 20px;
     background-color: #0097a7;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
+    border-radius: 18px;
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 2;
 }
 
 label[for="imageFile"]:hover {
     background-color: #00838f;
+    object-fit: fill;
+
 }
 
 label[for="imageFile"]:active {
     background-color: #02707a;
+    object-fit: fill;
+
 }
+
 
 img {
     max-width: 100%;
@@ -196,6 +213,7 @@ img {
     display: block;
     margin: 10px auto;
     border-radius: 8px;
+    object-fit: contain;
 }
 
 
@@ -235,7 +253,7 @@ img {
     justify-content: center;
     background-color: var(--button-bg);
     color: var(--text-color);
-    padding: 15px 25px;
+    padding: 20px 25px;
     border-radius: 10px;
     font-size: 1.2rem;
     cursor: pointer;
@@ -280,16 +298,25 @@ h1 {
     text-align: center;
     font-weight: 600;
     padding: 10px 5vw 20px;
-    display: block; /* inline-block не обов’язковий */
+    display: block;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 50px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     max-width: 90%;
-    width: fit-content; /* Щоб ширина була під текст */
-    margin: 0 auto; /* Центрує блок */
+    width: fit-content;
+    margin: 0 auto;
 }
 
-
+.file-label{
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    background-color: #0099ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
 h1:hover {
     color: #2c3150;
@@ -304,11 +331,35 @@ h1:hover {
 @media (max-width: 768px) {
 
     .upload-area {
-        height: 250px;
-    }
+        width: 90%;
+        max-width: 800px;
+        height: 350px;
+        margin: 0 auto;
+        background-color: transparent;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;   }
 
     .button, .back-button {
         font-size: 1rem;
         padding: 12px 20px;
     }
+}
+.preview-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
 }

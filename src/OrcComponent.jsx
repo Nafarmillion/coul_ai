@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './OrcComponent.css';
 import { processImage } from './back/ocrService';
 
@@ -8,6 +8,7 @@ const OrcComponent = () => {
     const [recognizedText, setRecognizedText] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const fileInputRef = useRef(null);
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -44,6 +45,15 @@ const OrcComponent = () => {
         }
     };
 
+    const resetFileInput = () => {
+        setFile(null);
+        setPreviewUrl(null);
+        setRecognizedText('');
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
+    };
+
     const copyToClipboard = () => {
         navigator.clipboard.writeText(recognizedText)
             .then(() => {
@@ -66,7 +76,11 @@ const OrcComponent = () => {
                             <div className="upload-area">
                                 {previewUrl ? (
                                     <div className="preview-container">
-                                        <img src={previewUrl} alt="Preview" className="image-preview"/>
+                                        <img
+                                            src={previewUrl}
+                                            alt="Preview"
+                                            className="image-preview"
+                                        />
                                     </div>
                                 ) : (
                                     <div className="upload-placeholder">
@@ -78,18 +92,17 @@ const OrcComponent = () => {
                                                 className="file-input"
                                                 accept="image/*"
                                                 onChange={handleFileChange}
+                                                ref={fileInputRef}
                                             />
                                         </label>
                                     </div>
                                 )}
                             </div>
-                            <button className='button'
-                                    type="submit"
-                                    disabled={isLoading || !file}>
+                            <button className='button' type="submit" disabled={isLoading || !file}>
                                 {isLoading ? 'Обробка...' : 'Завантажити'}
                             </button>
                         </form>
-
+                        <button className='button' type='button' onClick={resetFileInput}>Очистити</button>
                         {error && <div className="error-message">{error}</div>}
                     </div>
 
