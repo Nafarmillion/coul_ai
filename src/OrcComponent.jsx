@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './OrcComponent.css';
 
 
 const OcrComponent = () => {
@@ -14,7 +15,6 @@ const OcrComponent = () => {
             const selectedFile = e.target.files[0];
             setFile(selectedFile);
 
-            // Створення превью зображення
             const fileReader = new FileReader();
             fileReader.onload = () => {
                 setPreviewUrl(fileReader.result);
@@ -38,7 +38,7 @@ const OcrComponent = () => {
             const formData = new FormData();
             formData.append('imageFile', file);
 
-            const response = await axios.post('http://localhost:8080/api/ocr/recognize', formData, {
+            const response = await axios.post('http://localhost:5000/api/ocr/recognize', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -65,10 +65,14 @@ const OcrComponent = () => {
 
     return (
         <div>
-            <h2>Розпізнавання тексту з зображення</h2>
+            {/* ТУТ */}
+            <h1>Розпізнавання тексту з зображення</h1>
 
+            {/* ТУТ */}
             <form onSubmit={handleSubmit}>
+                {/* ТУТ */}
                 <div>
+                    {/* ТУТ */}
                     <label htmlFor="imageFile">
                         {previewUrl ? 'Змінити зображення' : 'Виберіть зображення'}
                         <input
@@ -81,11 +85,14 @@ const OcrComponent = () => {
                 </div>
 
                 {previewUrl && (
+                    // ТУТ
                     <div>
+                        {/* Может и тут... */}
                         <img src={previewUrl} alt="Preview" />
                     </div>
                 )}
 
+                {/* Может и нет... */}
                 <button
                     type="submit"
                     disabled={isLoading || !file}>
@@ -93,16 +100,21 @@ const OcrComponent = () => {
                 </button>
             </form>
 
+            {/* :) */}
             {error && <div>{error}</div>}
 
             {recognizedText && (
+                // Точно?
                 <div>
+                    {/* Уверена? */}
                     <div>
                         <h3>Розпізнаний текст:</h3>
+                        {/* ^_^ */}
                         <button onClick={copyToClipboard}>
                             Копіювати
                         </button>
                     </div>
+                    {/* xixixaxa */}
                     <div>{recognizedText}</div>
                 </div>
             )}
