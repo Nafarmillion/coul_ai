@@ -69,7 +69,7 @@ const OcrComponent = () => {
             <h1>Розпізнавання тексту з зображення</h1>
 
             {/* ТУТ */}
-            <form onSubmit={handleSubmit}>
+            <form className='container'onSubmit={handleSubmit}>
                 {/* ТУТ */}
                 <div>
                     {/* ТУТ */}
@@ -93,15 +93,15 @@ const OcrComponent = () => {
                 )}
 
                 {/* Может и нет... */}
-                <button
-                    type="submit"
-                    disabled={isLoading || !file}>
+                <button className='upload-btn'
+                        type="submit"
+                        disabled={isLoading || !file}>
                     {isLoading ? 'Обробка...' : 'Розпізнати текст'}
                 </button>
             </form>
 
             {/* :) */}
-            {error && <div>{error}</div>}
+            {error && <div className="error-message">{error}</div>}
 
             {recognizedText && (
                 // Точно?
