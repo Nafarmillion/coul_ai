@@ -83,6 +83,7 @@ const OrcComponent = () => {
                                         />
                                     </div>
                                 ) : (
+
                                     <div className="upload-placeholder">
                                         <label htmlFor="imageFile" className="file-label">
                                             Натисніть, щоб вибрати файл
