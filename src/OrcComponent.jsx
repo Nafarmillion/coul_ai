@@ -39,7 +39,7 @@ const OrcComponent = () => {
             const result = await processImage(file, lang);
             setRecognizedText(result);
         } catch (err) {
-            setError(`Помилка: ${err.message}`);
+            setError('Помилка: ${err.message}');
             console.error('Error:', err);
         } finally {
             setIsLoading(false);
@@ -73,47 +73,45 @@ const OrcComponent = () => {
                     <img src="./logo.png" alt="Логотип" className="logo" />
                     Розпізнавання рукописного тексту
                     <img src="./logo.png" alt="Логотип" className="logo" />
-                </h1>
+                </h1><div className="content-container">
+                <div className="left-panel">
+                    <h2 className="text-box-title">Виберіть зображення</h2>
+                    <form className='upload-form' onSubmit={handleSubmit}>
+                        <div className="upload-area">
+                            {previewUrl ? (
+                                <div className="preview-container">
+                                    <img
+                                        src={previewUrl}
+                                        alt="Preview"
+                                        className="image-preview"
+                                    />
+                                </div>
+                            ) : (
 
-
-                <div className="content-container">
-                    <div className="left-panel">
-                        <h2 className="text-box-title">Виберіть зображення</h2>
-                        <form className='upload-form' onSubmit={handleSubmit}>
-                            <div className="upload-area">
-                                {previewUrl ? (
-                                    <div className="preview-container">
-                                        <img
-                                            src={previewUrl}
-                                            alt="Preview"
-                                            className="image-preview"
+                                <div className="upload-placeholder">
+                                    <label htmlFor="imageFile" className="file-label">
+                                        Натисніть, щоб вибрати файл
+                                        <input
+                                            type="file"
+                                            id="imageFile"
+                                            className="file-input"
+                                            accept="image/*"
+                                            onChange={handleFileChange}
+                                            ref={fileInputRef}
                                         />
-                                    </div>
-                                ) : (
+                                    </label>
+                                </div>
+                            )}
+                        </div>
+                        <button className='button' type="submit" disabled={isLoading || !file}>
+                            {isLoading ? 'Обробка...' : 'Завантажити'}
+                        </button>
+                    </form>
+                    <button className='button' type='button' onClick={resetFileInput}>Очистити</button>
+                    {error && <div className="error-message">{error}</div>}
 
-                                    <div className="upload-placeholder">
-                                        <label htmlFor="imageFile" className="file-label">
-                                            Натисніть, щоб вибрати файл
-                                            <input
-                                                type="file"
-                                                id="imageFile"
-                                                className="file-input"
-                                                accept="image/*"
-                                                onChange={handleFileChange}
-                                                ref={fileInputRef}
-                                            />
-                                        </label>
-                                    </div>
-                                )}
-                            </div>
-                            <button className='button' type="submit" disabled={isLoading || !file}>
-                                {isLoading ? 'Обробка...' : 'Завантажити'}
-                            </button>
-                        </form>
-                        <button className='button' type='button' onClick={resetFileInput}>Очистити</button>
-                        {error && <div className="error-message">{error}</div>}
-
-                        <label htmlFor="radio1" className='radio-label'>
+                    <div className="radio-container">
+                        <div className="radio-btn nth-3">
                             <input
                                 type="radio"
                                 id="radio1"
@@ -122,10 +120,10 @@ const OrcComponent = () => {
                                 checked={lang === "ukr"}
                                 onChange={(e) => setLang(e.target.value)}
                             />
-                            Ukr
-                        </label>
+                            <label htmlFor="radio1">Ukr</label>
+                        </div>
 
-                        <label htmlFor="radio2" className='radio-label'>
+                        <div className="radio-btn nth-3">
                             <input
                                 type="radio"
                                 id="radio2"
@@ -134,19 +132,21 @@ const OrcComponent = () => {
                                 checked={lang === "eng"}
                                 onChange={(e) => setLang(e.target.value)}
                             />
-                            Eng
-                        </label>
-                        <label htmlFor="radio2" className='radio-label'>
+                            <label htmlFor="radio2">Eng</label>
+                        </div>
+
+                        <div className="radio-btn nth-3">
                             <input
                                 type="radio"
-                                id="radio2"
+                                id="radio3"
                                 name="radioGroup"
                                 value="ukr+eng"
                                 checked={lang === "ukr+eng"}
                                 onChange={(e) => setLang(e.target.value)}
                             />
-                            Ukr+Eng
-                        </label>
+                            <label htmlFor="radio3">Ukr+Eng</label>
+                        </div>
+                    </div>
                     </div>
 
                     <div className="right-panel">
@@ -164,7 +164,7 @@ const OrcComponent = () => {
                         </div>
 
                         {recognizedText && (
-                            <button className="button-copy-button" onClick={copyToClipboard}>
+                            <button className="button" onClick={copyToClipboard}>
                                 Копіювати текст
                             </button>
                         )}

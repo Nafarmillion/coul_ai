@@ -44,7 +44,6 @@ body {
     padding: 40px 20px;
     color: white;
 }
-
 /* Page title */
 .page-title {
     display:flex;
@@ -123,7 +122,6 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     text-align: center;
 }
-
 .right-panel:hover {
     transition: all 0.4s ease-in-out;
     transform: scale(1.04);
@@ -195,13 +193,11 @@ label[for="imageFile"] {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.05);
     z-index: 2;
-}
+}label[for="imageFile"]:hover {
+     background-color: #00838f;
+     object-fit: fill;
 
-label[for="imageFile"]:hover {
-    background-color: #00838f;
-    object-fit: fill;
-
-}
+ }
 
 label[for="imageFile"]:active {
     background-color: #02707a;
@@ -293,7 +289,6 @@ img {
     transition: background-color 0.3s;
     max-width: 350px;
 }
-
 h1 {
     font-size: 2rem;
     color: #2c3e50;
@@ -321,10 +316,63 @@ h1 {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.radio-label{
-color: #2c3e50;
-    padding-right: 10px;
+.radio-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    font-family: sans-serif;
+    border: 2px solid #02707a;
+    border-radius: 6px;
+    overflow: hidden;
 }
+
+.radio-container .radio-btn {
+    border-right: 2px solid #02707a;
+    overflow: hidden;
+    flex: 1;
+}
+
+.radio-container .radio-btn:last-child {
+    border-right: none;
+}
+
+.radio-container .nth-2 {
+    width: calc(50% - 1px);
+}
+
+.radio-container .nth-3 {
+    width: calc(33.3333% - 1.4px);
+}
+
+.radio-container .radio-btn label {
+    background-color: transparent;
+    color: #000;
+    display: block;
+    padding: 10px 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.radio-container .radio-btn label:hover {
+    background-color: #00838f; /* Цвет при наведении */
+    color: white;
+}
+
+.radio-container .radio-btn input:active + label {
+    background-color: #02707a; /* Цвет при нажатии */
+}
+
+.radio-container .radio-btn input {
+    display: none;
+}
+
+.radio-container .radio-btn input:checked + label {
+    background-color: #02707a; /* Використовуємо активний колір кнопки */
+    color: white;
+}
+
 
 h1:hover {
     color: #2c3150;
