@@ -66,8 +66,10 @@ const OrcComponent = () => {
     };
 
     return (
+
         <div className="main-wrapper">
             <div className="main-content">
+                <img src="./logo.png" alt="Логотип" className="logo" />
                 <h1 className="page-title">Розпізнавання рукописного тексту</h1>
 
                 <div className="content-container">
