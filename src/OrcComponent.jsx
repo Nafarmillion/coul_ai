@@ -9,6 +9,7 @@ const OrcComponent = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const fileInputRef = useRef(null);
+    const [lang, setLang] = useState('ukr');
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -35,7 +36,7 @@ const OrcComponent = () => {
         setRecognizedText('');
 
         try {
-            const result = await processImage(file);
+            const result = await processImage(file, lang);
             setRecognizedText(result);
         } catch (err) {
             setError(`Помилка: ${err.message}`);
@@ -105,6 +106,30 @@ const OrcComponent = () => {
                         </form>
                         <button className='button' type='button' onClick={resetFileInput}>Очистити</button>
                         {error && <div className="error-message">{error}</div>}
+
+                        <label htmlFor="radio1" className='radio-label'>
+                            <input
+                                type="radio"
+                                id="radio1"
+                                name="radioGroup"
+                                value="ukr"
+                                checked={lang === "ukr"}
+                                onChange={(e) => setLang(e.target.value)}
+                            />
+                            Ukr
+                        </label>
+
+                        <label htmlFor="radio2" className='radio-label'>
+                            <input
+                                type="radio"
+                                id="radio2"
+                                name="radioGroup"
+                                value="eng"
+                                checked={lang === "eng"}
+                                onChange={(e) => setLang(e.target.value)}
+                            />
+                            Eng
+                        </label>
                     </div>
 
                     <div className="right-panel">
