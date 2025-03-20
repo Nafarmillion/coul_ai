@@ -27,10 +27,7 @@ body {
 }
 
 .logo {
-    height: 200px;
-    background-color: #FFC0CB;
-    margin-left: -20px;
-    margin-top: -50px
+    height: 70px;
 }
 
 .language-flag {
@@ -50,6 +47,9 @@ body {
 
 /* Page title */
 .page-title {
+    display:flex;
+    align-items: center;
+    gap:10px;
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 40px;

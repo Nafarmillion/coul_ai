@@ -69,8 +69,12 @@ const OrcComponent = () => {
 
         <div className="main-wrapper">
             <div className="main-content">
-                <img src="./logo.png" alt="Логотип" className="logo" />
-                <h1 className="page-title">Розпізнавання рукописного тексту</h1>
+                <h1 className="page-title">
+                    <img src="./logo.png" alt="Логотип" className="logo" />
+                    Розпізнавання рукописного тексту
+                    <img src="./logo.png" alt="Логотип" className="logo" />
+                </h1>
+
 
                 <div className="content-container">
                     <div className="left-panel">
@@ -131,6 +135,17 @@ const OrcComponent = () => {
                                 onChange={(e) => setLang(e.target.value)}
                             />
                             Eng
+                        </label>
+                        <label htmlFor="radio2" className='radio-label'>
+                            <input
+                                type="radio"
+                                id="radio2"
+                                name="radioGroup"
+                                value="ukr+eng"
+                                checked={lang === "ukr+eng"}
+                                onChange={(e) => setLang(e.target.value)}
+                            />
+                            Ukr+Eng
                         </label>
                     </div>
 
