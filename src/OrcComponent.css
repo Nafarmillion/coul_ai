@@ -16,6 +16,7 @@
 
 body {
     background-color: var(--primary-bg);
+
 }
 
 .header {
@@ -38,11 +39,14 @@ body {
 }
 
 .main-content {
-    background: url('https://st.depositphotos.com/1389325/1921/v/950/depositphotos_19212171-stock-illustration-mathematics-seamless-pattern.jpg') repeat;
-    background-size: auto;
+    background: url('https://st.depositphotos.com/1389325/1921/v/950/depositphotos_19212171-stock-illustration-mathematics-seamless-pattern.jpg');
+    background-repeat: repeat-y;
+    background-size: cover;
     min-height: calc(100vh - 70px);
     padding: 40px 20px;
     color: white;
+    min-height: 100vh;
+
 }
 /* Page title */
 .page-title {
@@ -151,9 +155,11 @@ body {
     font-size: 2rem;
     margin-bottom: 12px;
     color: #2c3e50;
-    text-align: center;
+    text-align: center; /* Центруємо текст */
     font-weight: 600;
     padding-top: 30px;
+    width: 100%; /* Додаємо ширину 100%, щоб гарантовано зайняти весь доступний простір */
+    box-sizing: border-box; /* Для врахування відступів у ширині */
 }
 
 .text-box {
@@ -183,27 +189,37 @@ body {
 }
 
 label[for="imageFile"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #0097a7;
     border-radius: 18px;
     width: 100%;
     max-width: 500px;
+    min-width: 200px;
+    padding: 15px;
     margin: 40px auto;
     overflow: hidden;
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.05);
     z-index: 2;
-}label[for="imageFile"]:hover {
-     background-color: #00838f;
-     object-fit: fill;
+    text-align: center;
+    white-space: nowrap; /* Забороняє перенесення тексту */
+}
 
- }
+label[for="imageFile"]:hover {
+    background-color: #00838f;
+    object-fit: fill;
+
+}
 
 label[for="imageFile"]:active {
     background-color: #02707a;
     object-fit: fill;
 
 }
+
 
 
 img {
@@ -324,17 +340,18 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Это позволяет кнопкам переноситься на новую строку */
     font-family: sans-serif;
     border: 2px solid #02707a;
     border-radius: 6px;
     overflow: hidden;
+    width: 100%; /* Сделать контейнер шириной 100% */
 }
 
 .radio-container .radio-btn {
-    border-right: 2px solid #02707a;
-    overflow: hidden;
-    flex: 1;
+    flex: 1 1 30%; /* Гибкие элементы, которые занимают 1/3 ширины экрана */
+    padding: 5px;
+    text-align: center;
 }
 
 .radio-container .radio-btn:last-child {
@@ -357,6 +374,8 @@ h1 {
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    border-right: 1px solid #02707a; /* Добавляем правую границу между кнопками */
+    border-left: 1px solid #02707a; /* Добавляем правую границу между кнопками */
 }
 
 .radio-container .radio-btn label:hover {
@@ -405,6 +424,56 @@ h1:hover {
     .button, .back-button {
         font-size: 1rem;
         padding: 12px 20px;
+    }
+
+    .content-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-panel, .right-panel {
+        width: 100%;
+        max-width: 90%;
+        margin: 1rem 0;
+    }
+
+    h1, .page-title {
+        font-size: 100%;
+        padding: 1px;
+        word-wrap: break-word;
+    }
+
+    .logo {
+        height: 50px;
+    }
+
+    label[for="imageFile"] {
+        font-size: 1rem;
+        padding: 12px;
+        min-width: 180px;
+        text-align: center;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+
+    .text-box-title {
+        font-size: 1.5rem;
+        padding-left: 0;
+        width: 100%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .radio-container .radio-btn {
+        flex: 1 1 50%; /* Кнопки будут занимать 50% экрана */
+    }
+
+    .radio-container .radio-btn label {
+        font-size: 0.9rem; /* Уменьшаем размер шрифта */
+        padding: 8px 12px;
+        border-bottom: 1px solid #02707a;
+        border-top: 1px solid #02707a;
     }
 }
 .preview-container {

@@ -107,7 +107,7 @@ const OrcComponent = () => {
                             {isLoading ? 'Обробка...' : 'Завантажити'}
                         </button>
                     </form>
-                    <button className='button' type='button' onClick={resetFileInput}>Очистити</button>
+                    <button className='button-clear' type='button' onClick={resetFileInput}>Очистити</button>
                     {error && <div className="error-message">{error}</div>}
 
                     <div className="radio-container">
