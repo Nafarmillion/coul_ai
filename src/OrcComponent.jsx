@@ -145,7 +145,7 @@ const OcrComponent = () => {
                                                 type="file"
                                                 id="imageFile"
                                                 className="file-input"
-                                                accept="image/*"
+                                                accept="image/*,application/pdf"
                                                 onChange={handleFileChange}
                                                 ref={fileInputRef}
                                             />
