@@ -120,32 +120,42 @@ const OrcComponent = () => {
                                 checked={lang === "ukr"}
                                 onChange={(e) => setLang(e.target.value)}
                             />
-                            <label htmlFor="radio1">Ukr</label>
+                            <label htmlFor="radio1">Ukr(slower but more accurate)</label>
                         </div>
-
+                            <div className="radio-btn nth-3">
+                                <input
+                                    type="radio"
+                                    id="radio2"
+                                    name="radioGroup"
+                                    value="ukr2"
+                                    checked={lang === "ukr2"}
+                                    onChange={(e) => setLang(e.target.value)}
+                                />
+                                <label htmlFor="radio2">Ukr(faster but not accurate)</label>
+                            </div>
                         <div className="radio-btn nth-3">
                             <input
                                 type="radio"
-                                id="radio2"
+                                id="radio3"
                                 name="radioGroup"
                                 value="eng"
                                 checked={lang === "eng"}
                                 onChange={(e) => setLang(e.target.value)}
                             />
 
-                            <label htmlFor="radio2">Eng</label>
+                            <label htmlFor="radio3">Eng</label>
                         </div>
 
                         <div className="radio-btn nth-3">
                             <input
                                 type="radio"
-                                id="radio3"
+                                id="radio4"
                                 name="radioGroup"
                                 value="ukr+eng"
                                 checked={lang === "ukr+eng"}
                                 onChange={(e) => setLang(e.target.value)}
                             />
-                            <label htmlFor="radio3">Ukr+Eng</label>
+                            <label htmlFor="radio4">Ukr+Eng</label>
                         </div>
                     </div>
                     </div>
