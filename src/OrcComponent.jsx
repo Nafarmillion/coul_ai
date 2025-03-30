@@ -31,6 +31,7 @@ const OrcComponent = () => {
             return;
         }
 
+
         setIsLoading(true);
         setError('');
         setRecognizedText('');
