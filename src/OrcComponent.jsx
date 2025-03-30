@@ -168,35 +168,21 @@ const OcrComponent = () => {
                                         />
                                         <label htmlFor="radio1">
                                             <span className="radio-icon"></span>
-                                            <span className="radio-label">Українська (повільніше, але точніше)</span>
+                                            <span className="radio-label">Українська</span>
                                         </label>
                                     </div>
+
 
                                     <div className="language-option">
                                         <input
                                             type="radio"
                                             id="radio2"
                                             name="radioGroup"
-                                            value="ukr2"
-                                            checked={lang === "ukr2"}
-                                            onChange={(e) => setLang(e.target.value)}
-                                        />
-                                        <label htmlFor="radio2">
-                                            <span className="radio-icon"></span>
-                                            <span className="radio-label">Українська (швидше, але менш точно)</span>
-                                        </label>
-                                    </div>
-
-                                    <div className="language-option">
-                                        <input
-                                            type="radio"
-                                            id="radio3"
-                                            name="radioGroup"
                                             value="eng"
                                             checked={lang === "eng"}
                                             onChange={(e) => setLang(e.target.value)}
                                         />
-                                        <label htmlFor="radio3">
+                                        <label htmlFor="radio2">
                                             <span className="radio-icon"></span>
                                             <span className="radio-label">Англійська</span>
                                         </label>
@@ -205,13 +191,13 @@ const OcrComponent = () => {
                                     <div className="language-option">
                                         <input
                                             type="radio"
-                                            id="radio4"
+                                            id="radio3"
                                             name="radioGroup"
                                             value="ukr+eng"
                                             checked={lang === "ukr+eng"}
                                             onChange={(e) => setLang(e.target.value)}
                                         />
-                                        <label htmlFor="radio4">
+                                        <label htmlFor="radio3">
                                             <span className="radio-icon"></span>
                                             <span className="radio-label">Українська + Англійська</span>
                                         </label>
