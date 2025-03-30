@@ -16,7 +16,7 @@
 .dark-theme {
     --primary-color: #05c3d9;
     --primary-dark: #04a6ba;
-    --secondary-color: #1a1a1a; /* Темніший відтінок для вторинного кольору */
+    --secondary-color: #1a1a1a;
     --text-color: #e9ecef;
     --border-color: #333333;
     --error-color: #ff6b6b;
@@ -24,20 +24,19 @@
     --light-gray: #343a40;
     --hover-light: #3b4147;
     --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    --bg-color: #000000; /* Повністю чорний фон */
-    --card-bg: #1a1a1a; /* Трохи світліший для карток */
+    --bg-color: #000000;
+    --card-bg: #1a1a1a;
     --placeholder-color: #adb5bd;
     --icon-color: #6c757d;
 }
 
-/* Оновлений стиль body для темної теми */
+
 .dark-theme body {
     background-color: var(--bg-color);
-    background-image: none; /* Видаляємо патерни та градієнти */
+    background-image: none;
     color: var(--text-color);
 }
 
-/* Додайте ці правила для повного застосування темного фону */
 .dark-theme .app-container {
     background-color: var(--bg-color);
 }
@@ -46,7 +45,6 @@
     background-color: var(--bg-color);
 }
 
-/* Оновлення для панелей у темній темі */
 .dark-theme .upload-panel,
 .dark-theme .results-panel {
     background-color: var(--card-bg);
@@ -54,13 +52,11 @@
     border: 1px solid var(--border-color);
 }
 
-/* Оновлення для області завантаження файлів */
 .dark-theme .upload-area {
     border-color: var(--border-color);
     background-color: var(--secondary-color);
 }
 
-/* Оновлення для контейнера результатів */
 .dark-theme .results-container {
     border-color: var(--border-color);
     background-color: var(--secondary-color);
@@ -70,7 +66,6 @@
     background-color: var(--card-bg);
 }
 
-/* Переконуємося, що шапка має правильний колір */
 .dark-theme .app-header {
     background-color: var(--bg-color);
     border-bottom: 1px solid var(--border-color);
@@ -103,17 +98,14 @@
     background-color: #637080;
 }
 
-/* Текст вибору мови */
 .dark-theme .language-selection h3 {
     color: var(--text-color);
 }
 
-/* Стиль радіо-кнопок */
 .dark-theme .radio-label {
     color: var(--text-color);
 }
 
-/* Theme Toggle Switch */
 .theme-switch-container {
     position: absolute;
     top: 1rem;
