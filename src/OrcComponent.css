@@ -127,6 +127,8 @@
     width: 0;
     height: 0;
 }
+
+
 .slider {
     position: absolute;
     cursor: pointer;
@@ -163,18 +165,24 @@ input:checked + .slider:before {
 .slider:after {
     content: "☀️";
     position: absolute;
-    left: 8px;
-    top: 5px;
+    width: 22px;
+    height: 22px;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 15px;
+    transition: .4s;
 }
 
 input:checked + .slider:after {
     content: "🌙";
-    position: absolute;
-    right: 8px;
-    left: auto;
+    left: calc(100% - 26px);
 }
 
+
+.theme-switch-container span {
+    color: var(--primary-color);
+}
 
 * {
     box-sizing: border-box;
@@ -247,6 +255,12 @@ body {
     .panel-container {
         grid-template-columns: 1fr;
     }
+    .logo-container {
+        padding-top: 10%;
+        padding-left: 5%; /* Добавляем отступы слева и справа */
+        padding-right: 5%;
+    }
+
 }
 
 .upload-panel, .results-panel {
