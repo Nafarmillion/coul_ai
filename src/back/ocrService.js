@@ -6,10 +6,7 @@ export const processImage = async (imageFile, language) => {
     }
 
     try {
-        const worker = await Tesseract.createWorker(language, {
-            langPath: 'http://localhost:3000/tessdata',
-            cacheMethod: 'none',
-          });
+        const worker = await Tesseract.createWorker(language);
 
         const { data } = await worker.recognize(imageFile);
         await worker.terminate();
