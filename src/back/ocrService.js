@@ -1,17 +1,26 @@
-import Tesseract from 'tesseract.js';
-
 export const processImage = async (imageFile, language) => {
     if (!imageFile) {
         throw new Error('Файл не вказано');
     }
 
     try {
-        const worker = await Tesseract.createWorker(language);
+        const formData = new FormData();
+        formData.append('image', imageFile);
+        formData.append('language', 'uk');
+        
+        const response = await fetch('https://957e54ca-4695-4065-8011-b8bbd35a9e3c-00-2hhhgfzdaqjcc.spock.replit.dev/api/v1/ocr', {
+            method: 'POST',
+            body: formData
+        });
 
-        const { data } = await worker.recognize(imageFile);
-        await worker.terminate();
+        if (!response.ok) {
+            throw new Error('Помилка при завантаженні файлу на сервер');
+        }
+
+        const data = await response.json();
+        
         console.log('Розпізнаний текст:', data.text);
-        return data.text;
+        return data.text;  // Повертаємо розпізнаний текст
     } catch (error) {
         console.error('OCR processing error:', error);
         throw new Error('Не вдалося розпізнати текст');
