@@ -21,10 +21,10 @@ const OcrComponent = () => {
         return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     });
 
-    // const [history, setHistory] = useState(() => {
-    //     const savedHistory = localStorage.getItem('ocrHistory');
-    //     return savedHistory ? JSON.parse(savedHistory) : [];
-    // });
+    const [history, setHistory] = useState(() => {
+        const savedHistory = localStorage.getItem('ocrHistory');
+        return savedHistory ? JSON.parse(savedHistory) : [];
+    });
 
     const [selectionMode, setSelectionMode] = useState(false);
     const [selectionStart, setSelectionStart] = useState({ x: 0, y: 0 });
@@ -43,9 +43,9 @@ const OcrComponent = () => {
         localStorage.setItem('theme', darkMode ? 'dark' : 'light');
     }, [darkMode]);
 
-    // useEffect(() => {
-    //     localStorage.setItem('ocrHistory', JSON.stringify(history));
-    // }, [history]);
+    useEffect(() => {
+        localStorage.setItem('ocrHistory', JSON.stringify(history));
+    }, [history]);
 
     useEffect(() => {
         if (previewUrl && imageRef.current && canvasRef.current) {
@@ -199,14 +199,14 @@ const OcrComponent = () => {
             setRecognizedText(result);
             console.log('Текст успішно розпізнано:', result);
 
-            // addToHistory({
-            //     id: Date.now(),
-            //     filename: file.name,
-            //     language: lang,
-            //     previewUrl: previewUrl,
-            //     text: result,
-            //     date: new Date().toLocaleString(),
-            // });
+            addToHistory({
+                id: Date.now(),
+                filename: file.name,
+                language: lang,
+                previewUrl: previewUrl,
+                text: result,
+                date: new Date().toLocaleString(),
+            });
         } catch (err) {
             setError(`Помилка: ${err.message}`);
             console.error('Помилка при розпізнаванні:', err);
@@ -345,19 +345,19 @@ const OcrComponent = () => {
         }
     };
 
-    // const addToHistory = (entry) => {
-    //     const updatedHistory = [entry, ...history.slice(0, 9)];
-    //     setHistory(updatedHistory);
-    // };
-    //
-    // const loadFromHistory = (entry) => {
-    //     setRecognizedText(entry.text);
-    // };
-    //
-    // const removeFromHistory = (id) => {
-    //     const updatedHistory = history.filter(entry => entry.id !== id);
-    //     setHistory(updatedHistory);
-    // };
+    const addToHistory = (entry) => {
+        const updatedHistory = [entry, ...history.slice(0, 9)];
+        setHistory(updatedHistory);
+    };
+
+    const loadFromHistory = (entry) => {
+        setRecognizedText(entry.text);
+    };
+
+    const removeFromHistory = (id) => {
+        const updatedHistory = history.filter(entry => entry.id !== id);
+        setHistory(updatedHistory);
+    };
 
     const resetFileInput = () => {
         setFile(null);
@@ -605,36 +605,36 @@ const OcrComponent = () => {
                 </div>
 
                 {/* Секція історії завантажень */}
-                {/*<div className="history-section">*/}
-                {/*    <h2>Історія завантажень</h2>*/}
-                {/*    {history.length === 0 ? (*/}
-                {/*        <p className="no-history">Історія порожня. Розпізнані зображення з'являтимуться тут.</p>*/}
-                {/*    ) : (*/}
-                {/*        <div className="history-list">*/}
-                {/*            {history.map((entry) => (*/}
-                {/*                <div key={entry.id} className="history-item">*/}
-                {/*                    <div className="history-thumbnail">*/}
-                {/*                        <img src={entry.previewUrl} alt={entry.filename} />*/}
-                {/*                    </div>*/}
-                {/*                    <div className="history-details">*/}
-                {/*                        <h4>{entry.filename}</h4>*/}
-                {/*                        <p>Мова: {entry.language === 'ukr' ? 'Українська' :*/}
-                {/*                            entry.language === 'eng' ? 'Англійська' : 'Українська + Англійська'}</p>*/}
-                {/*                        <p>Дата: {entry.date}</p>*/}
-                {/*                        <div className="history-actions">*/}
-                {/*                            <button onClick={() => loadFromHistory(entry)}>*/}
-                {/*                                Завантажити*/}
-                {/*                            </button>*/}
-                {/*                            <button onClick={() => removeFromHistory(entry.id)}>*/}
-                {/*                                Видалити*/}
-                {/*                            </button>*/}
-                {/*                        </div>*/}
-                {/*                    </div>*/}
-                {/*                </div>*/}
-                {/*            ))}*/}
-                {/*        </div>*/}
-                {/*    )}*/}
-                {/*</div>*/}
+                <div className="history-section">
+                    <h2>Історія завантажень</h2>
+                    {history.length === 0 ? (
+                        <p className="no-history">Історія порожня. Розпізнані зображення з'являтимуться тут.</p>
+                    ) : (
+                        <div className="history-list">
+                            {history.map((entry) => (
+                                <div key={entry.id} className="history-item">
+                                    <div className="history-thumbnail">
+                                        <img src={entry.previewUrl} alt={entry.filename} />
+                                    </div>
+                                    <div className="history-details">
+                                        <h4>{entry.filename}</h4>
+                                        <p>Мова: {entry.language === 'ukr' ? 'Українська' :
+                                            entry.language === 'eng' ? 'Англійська' : 'Українська + Англійська'}</p>
+                                        <p>Дата: {entry.date}</p>
+                                        <div className="history-actions">
+                                            <button onClick={() => loadFromHistory(entry)}>
+                                                Завантажити
+                                            </button>
+                                            <button onClick={() => removeFromHistory(entry.id)}>
+                                                Видалити
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
