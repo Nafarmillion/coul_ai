@@ -570,8 +570,6 @@ const OcrComponent = () => {
                                     </div>
                                     <div className="history-details">
                                         <h4>{entry.filename}</h4>
-                                        <p>Мова: {entry.language === 'ukr' ? 'Українська' :
-                                            entry.language === 'eng' ? 'Англійська' : 'Українська + Англійська'}</p>
                                         <p>Дата: {entry.date}</p>
                                         <div className="history-actions">
                                             <button onClick={() => loadFromHistory(entry)}>
