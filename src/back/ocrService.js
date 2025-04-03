@@ -1,4 +1,4 @@
-export const processImage = async (imageFile, language) => {
+export const processImage = async (imageFile) => {
     if (!imageFile) {
         throw new Error('Файл не вказано');
     }
@@ -6,7 +6,6 @@ export const processImage = async (imageFile, language) => {
     try {
         const formData = new FormData();
         formData.append('image', imageFile);
-        formData.append('language', language);
         
         const response = await fetch('https://957e54ca-4695-4065-8011-b8bbd35a9e3c-00-2hhhgfzdaqjcc.spock.replit.dev/api/v1/ocr', {
             method: 'POST',
