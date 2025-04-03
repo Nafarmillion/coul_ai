@@ -556,7 +556,7 @@ const OcrComponent = () => {
                     </div>
                 </div>
 
-                {/* Секція історії завантажень 
+                {/* Секція історії завантажень */}
                 <div className="history-section">
                     <h2>Історія завантажень</h2>
                     {history.length === 0 ? (
@@ -584,7 +584,7 @@ const OcrComponent = () => {
                             ))}
                         </div>
                     )}
-                </div>*/}
+                </div>
             </div>
         </div>
     );
