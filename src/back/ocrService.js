@@ -9,7 +9,7 @@ export const processImage = async (imageFile) => {
         const formData = new FormData();
         formData.append('file', imageFile);
 
-        const response = await fetch('https://5512f5d8e184.ngrok-free.app/analyze', {
+        const response = await fetch('https://0a1d8efb9c13.ngrok-free.app/analyze', {
             method: 'POST',
             body: formData
         });
