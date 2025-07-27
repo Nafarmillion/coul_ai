@@ -1,70 +1,99 @@
-# Getting Started with Create React App
+================================================================================
+   ____      _       _      _        _     _____ _____ 
+  / ___|___ | | ___ (_) ___| |_ __ _| |__ | ____|_   _|
+ | |   / _ \| |/ _ \| |/ __| __/ _` | '_ \|  _|   | |  
+ | |__| (_) | | (_) | | (__| || (_| | |_) | |___  | |  
+  \____\___/|_|\___//_|\___|\__\__,_|_.__/|_____| |_|  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ Frontend interface for AI-based table recognition from images.
+================================================================================
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+**Coul.AI** is a web interface for interacting with a custom neural network model that extracts tabular data from images and returns it in structured JSON and Excel format.  
+The system is designed to be minimal, fast, and easily extendable for document analysis workflows.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Upload image files containing tables (scans, photos, or printed)
+- Automatically sends image to FastAPI backend for recognition
+- Receives structured response (JSON with `gt_parse.table`)
+- Converts recognized data into downloadable `.xlsx` file
+- Deployed on [Vercel](https://coul-ai.vercel.app)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- React (Vite)
+- JavaScript (ES6+)
+- XLSX.js (SheetJS) — for generating Excel files
+- FastAPI backend (external, required)
+- Fetch API for communication
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+```bash
+git clone https://github.com/Nafarmillion/coul_ai.git
+cd coul_ai
+npm install
+npm run dev
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This will start the local development server at `http://localhost:3000`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Make sure your backend (FastAPI) is running at `http://127.0.0.1:8000/analyze` or a public endpoint (e.g. via ngrok).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Deployment
 
-### `npm run eject`
+Frontend is deployed on Vercel:  
+👉 [https://coul-ai.vercel.app](https://coul-ai.vercel.app)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To deploy your own instance:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run build
+# then deploy using your method (e.g. Vercel, Netlify, custom server)
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Project Structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+coul_ai/
+├── public/
+├── src/
+│   ├── components/       # React components
+│   ├── services/         # API calls and logic
+│   └── App.jsx           # Main application entry
+├── package.json
+├── vite.config.js
+└── README.md
+```
 
-## Learn More
+## API Expectations
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The backend should respond to a `POST` request at `/analyze` with a JSON in the following format:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```json
+{
+  "gt_parse": {
+    "table": [
+      {
+        "id": "1",
+        "content": ["col1", "col2", "col3", "..."]
+      },
+      {
+        "id": "2",
+        "content": ["data1", "data2", "data3", "..."]
+      }
+    ]
+  }
+}
+```
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project is distributed under the MIT License.  
+See [`LICENSE`](./LICENSE) for details.
 
-### Analyzing the Bundle Size
+## Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Developed and maintained by [@Nafarmillion](https://github.com/Nafarmillion)
