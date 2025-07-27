@@ -1,3 +1,5 @@
+import * as XLSX from 'xlsx';
+
 export const processImage = async (imageFile) => {
     if (!imageFile) {
         throw new Error('Файл не вказано');
@@ -5,9 +7,9 @@ export const processImage = async (imageFile) => {
 
     try {
         const formData = new FormData();
-        formData.append('image', imageFile);
-        
-        const response = await fetch('https://957e54ca-4695-4065-8011-b8bbd35a9e3c-00-2hhhgfzdaqjcc.spock.replit.dev/api/v1/ocr', {
+        formData.append('file', imageFile);
+
+        const response = await fetch('http://127.0.0.1:8000/analyze', {
             method: 'POST',
             body: formData
         });
@@ -17,11 +19,37 @@ export const processImage = async (imageFile) => {
         }
 
         const data = await response.json();
-        
-        console.log('Розпізнаний текст:', data.text);
-        return data.text;  // Повертаємо розпізнаний текст
+        console.log('Отримана відповідь від бека:', data);
+
+        // === Виправлено: використовуємо data.table ===
+        if (data.table && Array.isArray(data.table)) {
+            const tableData = data.table;
+            const worksheetData = [];
+
+            for (let row of tableData) {
+                if (Array.isArray(row.content)) {
+                    worksheetData.push(row.content);
+                }
+            }
+
+            if (worksheetData.length === 0) {
+                throw new Error('Таблиця не містить жодного рядка.');
+            }
+
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Розпізнані дані');
+            XLSX.writeFile(workbook, 'розпізнані_дані.xlsx');
+
+            console.log('✅ Excel-файл створено.');
+            return 'Файл Excel успішно створено та завантажено.';
+        } else {
+            console.warn('❗ Відповідь не містить таблиці.');
+            return 'Відповідь не містить таблиці.';
+        }
+
     } catch (error) {
-        console.error('OCR processing error:', error);
-        throw new Error('Не вдалося розпізнати текст');
+        console.error('❌ Помилка обробки:', error);
+        throw new Error('Не вдалося створити Excel-файл.');
     }
 };
