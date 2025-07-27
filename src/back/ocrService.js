@@ -45,9 +45,9 @@ export const processImage = async (imageFile) => {
             return 'Файл Excel успішно створено та завантажено.';
         } else {
             console.warn('❗ Відповідь не містить таблиці.');
-            return 'Відповідь не містить таблиці або має помилки які викликають помилку генерації.\nВідповідь сервера:'+data;
+            const responseText = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+            return 'Відповідь не містить таблиці або має помилки, які викликають помилку генерації.\n\nВідповідь сервера:\n' + responseText;
         }
-
     } catch (error) {
         console.error('❌ Помилка обробки:', error);
         throw new Error('Не вдалося створити Excel-файл.');
