@@ -7,49 +7,59 @@ export const processImage = async (imageFile) => {
 
     try {
         const formData = new FormData();
-        formData.append('file', imageFile);
 
-        const response = await fetch('https://0a1d8efb9c13.ngrok-free.app/analyze', {
+        // Наш API очікує саме поле image
+        formData.append('image', imageFile);
+
+        // Якщо потрібен український OCR
+        formData.append('language', 'uk');
+
+        // Якщо код працює на тому самому домені:
+        const apiUrl = 'https://957e54ca-4695-4065-8011-b8bbd35a9e3c-00-2hhhgfzdaqjcc.spock.replit.dev/api/v1/ocr';
+
+        // Якщо код працює в окремому застосунку,
+        // замініть apiUrl на повну адресу нашого сервера:
+        // const apiUrl = 'https://адреса-нашого-сервера/api/v1/ocr';
+
+        const response = await fetch(apiUrl, {
             method: 'POST',
             body: formData
         });
 
-        if (!response.ok) {
-            throw new Error('Помилка при завантаженні файлу на сервер');
-        }
-
         const data = await response.json();
-        console.log('Отримана відповідь від бека:', data);
 
-        // === Виправлено: використовуємо data.table ===
-        if (data.table && Array.isArray(data.table)) {
-            const tableData = data.table;
-            const worksheetData = [];
-
-            for (let row of tableData) {
-                if (Array.isArray(row.content)) {
-                    worksheetData.push(row.content);
-                }
-            }
-
-            if (worksheetData.length === 0) {
-                throw new Error('Таблиця не містить жодного рядка.');
-            }
-
-            const workbook = XLSX.utils.book_new();
-            const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-            XLSX.utils.book_append_sheet(workbook, worksheet, 'Розпізнані дані');
-            XLSX.writeFile(workbook, 'розпізнані_дані.xlsx');
-
-            console.log('✅ Excel-файл створено.');
-            return 'Файл Excel успішно створено та завантажено.';
-        } else {
-            console.warn('❗ Відповідь не містить таблиці.');
-            const responseText = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
-            return 'Відповідь не містить таблиці або має помилки, які викликають помилку генерації.\n\nВідповідь сервера:\n' + responseText;
+        if (!response.ok) {
+            throw new Error(
+                data.error || 'Помилка при розпізнаванні файлу'
+            );
         }
+
+        if (typeof data.text !== 'string' || !data.text.trim()) {
+            throw new Error('Сервер не повернув розпізнаний текст');
+        }
+
+        // Кожен рядок OCR-тексту буде окремим рядком Excel
+        const worksheetData = data.text
+            .split(/\r?\n/)
+            .filter(line => line.trim() !== '')
+            .map(line => [line]);
+
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+
+        XLSX.utils.book_append_sheet(
+            workbook,
+            worksheet,
+            'Розпізнані дані'
+        );
+
+        XLSX.writeFile(workbook, 'розпізнані_дані.xlsx');
+
+        return 'Файл Excel успішно створено та завантажено.';
     } catch (error) {
-        console.error('❌ Помилка обробки:', error);
-        throw new Error('Не вдалося створити Excel-файл.');
+        console.error('Помилка обробки:', error);
+        throw new Error(
+            error.message || 'Не вдалося створити Excel-файл.'
+        );
     }
 };
